@@ -1,8 +1,8 @@
 {
-  "elasticsearch-metrics": {
-    "host": "localhost",
-    "port": 9200,
-    "index": "sensu-metrics",
-    "type": "metrics"
+  "handlers": {
+    "elasticsearch-metrics": {
+      "type": "pipe",
+      "command": "/etc/sensu/handlers/elasticsearch-metrics.rb"
+    }
   }
 }

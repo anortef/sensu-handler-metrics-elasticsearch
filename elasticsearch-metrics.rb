@@ -44,6 +44,8 @@ class ElasticsearchMetrics < Sensu::Handler
      metrics ={}
      @event['check']['output'].split("\n").each do |line|
        v = line.split("\t")
+       v.each do |actualResults|
+         values = actualResults.split(" ")
        #if /percentage|five/ =~ v[0]
          metrics = {
             :@timestamp => time_stamp,
@@ -53,8 +55,8 @@ class ElasticsearchMetrics < Sensu::Handler
             :address => @event['client']['address'],
             :command => @event['check']['command'],
             :occurrences => @event['occurrences'],
-            :key => v[0],
-            :value => v[1]
+            :key => values[0],
+            :value => values[1]
          }
          begin
            timeout(5) do
@@ -78,6 +80,7 @@ class ElasticsearchMetrics < Sensu::Handler
            puts "elasticsearch timeout error."
          end
        #end
+       end
     end
   end
 end
