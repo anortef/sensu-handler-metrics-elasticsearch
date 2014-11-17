@@ -47,6 +47,7 @@ class ElasticsearchMetrics < Sensu::Handler
        v.each do |actualResults|
          values = actualResults.split(" ")
        #if /percentage|five/ =~ v[0]
+         valueMetric = values[1]
          metrics = {
             :@timestamp => time_stamp,
             :client => @event['client']['name'],
@@ -56,7 +57,7 @@ class ElasticsearchMetrics < Sensu::Handler
             :command => @event['check']['command'],
             :occurrences => @event['occurrences'],
             :key => values[0],
-            :value => values[1]
+            :value => valueMetric.to_f
          }
          begin
            timeout(5) do
