@@ -67,7 +67,7 @@ class ElasticsearchMetrics < Sensu::Handler
              request.body = JSON.dump(metrics)
 
              response = http.request(request)
-             if response.code == '200|201'
+             if response.code == '200' || response.code == '201'
                puts "request metrics #=> #{metrics}"
                puts "request body #=> #{response.body}"
                puts "elasticsearch post ok."
