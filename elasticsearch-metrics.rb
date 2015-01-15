@@ -11,11 +11,11 @@ require 'date'
 
 class ElasticsearchMetrics < Sensu::Handler
   def host
-    'localhost'
+    settings['elasticsearch']['host'] || 'localhost'
   end
 
   def port
-    9200
+    settings['elasticsearch']['port'] || 9200
   end
 
   def es_index
